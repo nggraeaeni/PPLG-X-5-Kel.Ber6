@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Informasi Sampah</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav>
+    <img src="iconn.png" width="50">
+    <h2>Sistem Informasi Sampah</h2>
+  </nav>
+
+  <!-- DESKRIPSI -->
+  <div class="card">
+    <h1>Angkutan Sampah Perumahan</h1>
+    <p>
+      Layanan ini membantu mengatur pengangkutan sampah di lingkungan perumahan
+      agar lebih tertib dan bersih. Jadwal dilakukan secara rutin sesuai rute
+      yang telah ditentukan.
+    </p>
+
+    <ul>
+      <li>Rute A: No 1 - 20</li>
+      <li>Rute B: No 21 - 40</li>
+      <li>Rute C: No 41 - 60</li>
+    </ul>
+  </div>
+
+  <!-- JADWAL -->
+  <div class="card">
+    <h2>Jadwal Pengangkutan</h2>
+
+    <table>
+      <tr>
+        <th>Rute</th>
+        <th>Hari</th>
+        <th>Waktu</th>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>Senin</td>
+        <td>08.00 - 10.00</td>
+      </tr>
+      <tr>
+        <td>B</td>
+        <td>Rabu</td>
+        <td>08.00 - 10.00</td>
+      </tr>
+      <tr>
+        <td>C</td>
+        <td>Jumat</td>
+        <td>08.00 - 10.00</td>
+      </tr>
+    </table>
+
+    <!-- KALENDER -->
+    <div class="calendar-box">
+      <h3>Pilih Tanggal</h3>
+      <input type="date">
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="card">
+    <h2>Kontak</h2>
+
+    <form>
+      <label>No Rumah</label>
+      <input type="text">
+
+      <label>Pesan</label>
+      <textarea rows="4"></textarea>
+
+      <input type="submit" value="Kirim">
+    </form>
+  </div>
+
+</body>
+</html>
