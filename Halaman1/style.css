@@ -27,6 +27,9 @@ main h1{
     cursor: pointer;
 }
 .bawah button a{
+    background-color: #4CAF50;
+    border-radius: 10px;
+  
     color: white;
     text-decoration: none;
 }
