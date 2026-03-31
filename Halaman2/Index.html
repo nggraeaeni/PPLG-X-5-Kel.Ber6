@@ -69,33 +69,27 @@
     <p>Jika Anda memiliki pertanyaan atau keluhan tentang layanan pengangkutan
        sampah, silakan hubungi kami melalui formulir di bawah ini.</p>
 
-    <form>
-      <label>No Rumah</label>
-      <input type="text">
+   <form>
+  <label>No Rumah</label>
+  <input type="text" id="noRumahInput"> <label>Pesan</label>
+  <textarea id="pesanInput" rows="4"></textarea> <input type="submit" id="btnKirim" value="Kirim"> 
+   </form>
 
-      <label>Pesan</label>
-      <textarea rows="4"></textarea>
-
-      <input type="submit" value="Kirim">
-    </form>
-  </div>
-
-  <!-- buat kotak output dari kontak nya -->
-  <!-- buat tombol delete nya -->
-  <!-- buat pop up/ aletnya -->
-   
-  <div class="card">
-    <h2>Laporan</h2>
-      <table>
+<div class="card">
+  <h2>Laporan</h2>
+  <table>
+    <thead>
+      <tr>
         <th>No Rumah</th>
         <th>Pesan</th>
         <th>Waktu</th>
         <th>Tindakan</th>
-    
+      </tr>
+    </thead>
     <tbody id="isi">
-    </tbody>
-    </table>
-  </div>
+      </tbody>
+  </table>
+</div>
 
 
 <script src="script.js"></script>
