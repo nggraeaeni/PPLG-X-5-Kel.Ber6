@@ -1,12 +1,11 @@
-let Kirim = document.getElementById('krm');
+let tombolKirim = document.getElementById('btnKirim');
+let isiTabel = document.getElementById('isi');
 
-// Menambahkan aksi ketika tombol diklik
-Kirim.addEventListener('click', function(event) {
-    // Mencegah halaman me-refresh karena sifat bawaan type="submit"
+tombolKirim.addEventListener('click', function(event) {
     event.preventDefault(); 
 
-    let noRumah = document.getElementById('npRumah').value;
-    let pesan = document.getElementById('pesan').value;
+    let noRumah = document.getElementById('noRumahInput').value;
+    let pesan = document.getElementById('pesanInput').value;
     const waktu = new Date().toLocaleString('id-ID');
 
     if (noRumah === "" || pesan === "") {
@@ -19,23 +18,23 @@ Kirim.addEventListener('click', function(event) {
     barisBaru.innerHTML = `
         <td>${noRumah}</td>
         <td>${pesan}</td>
-        <td>${waktuSekarang}</td>
+        <td>${waktu}</td>
         <td>
-            <button class="btn-edit">Edit</button>
             <button class="btn-hapus">Hapus</button>
         </td>
     `;
 
-    // 6. Masukkan baris ke dalam tbody tabel
-    isi.appendChild(barisBaru);
+    let tombolHapus = barisBaru.querySelector('.btn-hapus');
+    tombolHapus.addEventListener('click', function() {
+        if(confirm("Apakah Anda yakin ingin menghapus laporan ini?")) {
+            barisBaru.remove();
+        }
+    });
 
-    // 7. Reset form setelah kirim
-    document.getElementById('noRumah').value="";
-    document.getElementById('pesan').value="";
-    document.getElementById('waktu').value="";
+    isiTabel.appendChild(barisBaru);
 
-
-
-    
     alert('Pesan anda sudah terkirim');
+    
+    document.getElementById('noRumahInput').value = "";
+    document.getElementById('pesanInput').value = "";
 });
