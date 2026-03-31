@@ -125,3 +125,16 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background: #1a35cc;
 }
+
+.btn-hapus {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-hapus:hover {
+  background-color: #cc0000;
+}
