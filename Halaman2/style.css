@@ -5,34 +5,84 @@
   font-family: 'Segoe UI', sans-serif;
 }
 
+
 body {
-  background: #a4c5f3;
+  background: #e5fae9;
   padding: 20px;
+  margin: 0px;
+  padding: 0px;
+  font-family: Arial, sans-serif;
+
+}
+
+.rute-container {
+  display: flex;          /* Membuat rute berjejer ke samping */
+  gap: 15px;             /* Jarak antar kotak */
+  justify-content: start; /* Mulai dari kiri */
+  padding: 20px 0;
+}
+
+.rute-card {
+  background-color: #f8f9fa; /* Warna latar kotak tipis */
+  border: 1px solid #ddd;    /* Garis tepi tipis */
+  border-radius: 10px;       /* Sudut melengkung */
+  padding: 15px 30px;        /* Jarak dalam kotak */
+  text-align: center;        /* Teks di tengah */
+  min-width: 120px;          /* Lebar minimal kotak */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan halus */
+}
+
+.icon {
+  font-size: 20px;
+  color: #2e7d32;            /* Warna hijau ikon (sesuaikan) */
+  margin-bottom: 5px;
+}
+
+.rute-card h3 {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.rute-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
 }
 
     /* NAVBAR */
 nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  padding: 15px 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  margin-bottom: 20px;
+background-color: #ffffff;
+padding-left: 190px;
+display: flex;
+align-items: center;
+height: 90px;
+margin: 0px 0px 30px 0px;
 }
 
 nav h2 {
-  color: #0d249a;
+  color: #000000;
+  margin-left: 10px;
+  font-size: 19px;
+}
+nav img {
+  margin-right: 10px;
+  background-color: rgb(6, 92, 26);
+  height: 40px;
+  width: 40px;
+  border-radius: 10%;
+
 }
 
-    /* CARD STYLE */
+/*card */
 .card {
   background: white;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   margin-bottom: 20px;
+  width: 70%;
+  margin-left: 15%;
 }
 
 h1 {
@@ -42,13 +92,9 @@ h1 {
 
 p {
   line-height: 1.6;
-  color: #555;
+  color: #b8b8b8;
 }
 
-ul {
-  margin-top: 10px;
-  padding-left: 20px;
-}
 
 table {
   width: 100%;
@@ -59,7 +105,7 @@ table {
 }
 
 th {
-  background: #2b4eff;
+  background: #16c327;
   color: white;
 }
 

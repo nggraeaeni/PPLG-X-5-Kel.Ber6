@@ -6,8 +6,19 @@ tombolKirim.addEventListener('click', function(event) {
 
     let noRumah = document.getElementById('noRumahInput').value;
     let pesan = document.getElementById('pesanInput').value;
-    const waktu = new Date().toLocaleString('id-ID');
+    let tanggalInput = document.getElementById('tanggalInput').value;
+    let waktu;
 
+    if (tanggalInput) {
+        waktu = new Date(tanggalInput).toLocaleDateString('id-ID', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+        });
+        } else {
+        waktu = new Date().toLocaleDateString('id-ID');
+    }
+    
     if (noRumah === "" || pesan === "") {
         alert('Mohon isi semua data!');
         return;

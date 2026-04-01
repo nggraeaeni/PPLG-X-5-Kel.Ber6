@@ -10,7 +10,7 @@
 <body>
 
   <nav>
-    <img src="trash-solid.png" width="40">
+    <img src="tong sampah.png" width="40">
     <h2>Sistem Informasi Sampah</h2>
   </nav>
 
@@ -22,11 +22,26 @@
       yang telah ditentukan.
     </p>
 
-    <ul>
-      <li>Rute A: No 1 - 20</li>
-      <li>Rute B: No 21 - 40</li>
-      <li>Rute C: No 41 - 60</li>
-    </ul>
+    <div class="rute-container">
+      <div class="rute-card">
+        <div class="icon">📍</div>
+        <h3>Rute A</h3>
+        <p>No 1 - 20</p>
+      </div>
+      
+      <div class="rute-card">
+        <div class="icon">📍</div>
+        <h3>Rute B</h3>
+        <p>No 21 - 40</p>
+      </div>
+      
+      <div class="rute-card">
+        <div class="icon">📍</div>
+        <h3>Rute C</h3>
+        <p>No 41 - 60</p>
+      </div>
+    </div>
+    
   </div>
 
   <!-- jadwal -->
@@ -59,7 +74,7 @@
     <!-- kalender -->
     <div class="calendar-box">
       <h3>Pilih Tanggal Pengambilan Sampah</h3>
-      <input type="date">
+      <input type="date" id="tanggalInput">
     </div>
   </div>
 
@@ -90,7 +105,6 @@
       </tbody>
   </table>
 </div>
-
 
 <script src="script.js"></script>
 
