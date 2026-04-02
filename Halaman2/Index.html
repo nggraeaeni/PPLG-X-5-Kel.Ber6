@@ -10,36 +10,37 @@
 <body>
 
   <nav>
-    <img src="trash.png" width="40">
+    <img src="tong sampah.png" width="40">
     <h2>Sistem Informasi Sampah</h2>
   </nav>
 
-    <div class="card">
-      <h1><img class="c1" src="car.png" width="30"> Angkutan Sampah Perumahan</h1>
+  <div class="card">
+    <h1>Angkutan Sampah Perumahan</h1>
     <p>
       Layanan ini membantu mengatur pengangkutan sampah di lingkungan perumahan
       agar lebih tertib dan bersih. Jadwal dilakukan secara rutin sesuai rute
       yang telah ditentukan.
     </p>
 
-    <center>
-      <div class="rute-container">
-        <div class="rute-card">
-          <h3>Rute A</h3>
-          <p>No 1 - 20</p>
-        </div>
-        
-        <div class="rute-card">
-          <h3>Rute B</h3>
-          <p>No 21 - 40</p>
-        </div>
-        
-        <div class="rute-card">
-          <h3>Rute C</h3>
-          <p>No 41 - 60</p>
-        </div>
+    <div class="rute-container">
+      <div class="rute-card">
+        <div class="icon">📍</div>
+        <h3>Rute A</h3>
+        <p>No 1 - 20</p>
       </div>
-    </center>
+      
+      <div class="rute-card">
+        <div class="icon">📍</div>
+        <h3>Rute B</h3>
+        <p>No 21 - 40</p>
+      </div>
+      
+      <div class="rute-card">
+        <div class="icon">📍</div>
+        <h3>Rute C</h3>
+        <p>No 41 - 60</p>
+      </div>
+    </div>
     
   </div>
 
@@ -84,8 +85,11 @@
        sampah, silakan hubungi kami melalui formulir di bawah ini.</p>
 
    <form>
+  <label>Nama</label>
+  <input type="text" id="NamaInput">
   <label>No Rumah</label>
-  <input type="text" id="noRumahInput"> <label>Pesan</label>
+  <input type="text" id="noRumahInput"> 
+  <label>Pesan</label>
   <textarea id="pesanInput" rows="4"></textarea> <input type="submit" id="btnKirim" value="Kirim"> 
    </form>
 
@@ -94,6 +98,8 @@
   <table>
     <thead>
       <tr>
+        <th>Nama</th>
+        <th>Rute</th>
         <th>No Rumah</th>
         <th>Pesan</th>
         <th>Waktu</th>
