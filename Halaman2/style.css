@@ -15,27 +15,35 @@ body {
 
 }
 
+
 .rute-container {
   display: flex;          
   gap: 15px;             
-  justify-content: start; 
+  justify-content: center; 
   padding: 20px 0;
+  text-align: left;
 }
 
 .rute-card {
   background-color: #f8f9fa; 
   border: 1px solid #ddd;    
   border-radius: 10px;      
-  padding: 15px 30px;      
-  text-align: center;       
-  min-width: 120px;          
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+  padding: 20px 20px;           
+  min-width: 150px;          
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  width: 300px;
 }
 
-.icon {
-  font-size: 20px;
+.rute-container h3 {
   color: #2e7d32;            
-  margin-bottom: 5px;
+}
+
+.c1 {
+  width: 50px;
+}
+
+div h1 {
+  margin-bottom: 10px;
 }
 
 .rute-card h3 {
@@ -50,14 +58,15 @@ body {
   color: #666;
 }
 
-    /* NAVBAR */
+/* navbar */
 nav {
 background-color: #ffffff;
 padding-left: 190px;
 display: flex;
-align-items: center;
-height: 90px;
+height: 70px;
 margin: 0px 0px 30px 0px;
+align-items: center;
+border-radius: 10px;
 }
 
 nav h2 {
@@ -68,8 +77,8 @@ nav h2 {
 nav img {
   margin-right: 10px;
   background-color: rgb(6, 92, 26);
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
   border-radius: 10%;
 
 }
@@ -83,6 +92,9 @@ nav img {
   margin-bottom: 20px;
   width: 70%;
   margin-left: 15%;
+}
+.card img {
+  
 }
 
 h1 {
@@ -105,7 +117,7 @@ table {
 }
 
 th {
-  background: #16c327;
+  background:rgb(46, 125, 50);
   color: white;
 }
 
@@ -115,11 +127,11 @@ th, td {
 }
 
 tr:nth-child(even) {
-  background: #f4f7ff;
+  background: #cdfdd06e;
 }
 
 tr:hover {
-  background: #e0e7ff;
+  background: #287c2826;
 }
 
 /* kalender */
@@ -132,18 +144,18 @@ input[type="date"] {
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 15px;
-  background: #f9fbff;
+  background: #ffffff35;
   transition: 0.3s;
 }
 
 input[type="date"]:hover {
-  border-color: #2b4eff;
+  border-color: rgb(46, 125, 50);
 }
 
 input[type="date"]:focus {
   outline: none;
-  border-color: #2b4eff;
-  box-shadow: 0 0 5px rgba(43,78,255,0.5);
+  border-color: rgb(46, 125, 50);
+  box-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
 }
 
   /* form */
