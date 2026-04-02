@@ -16,25 +16,25 @@ body {
 }
 
 .rute-container {
-  display: flex;          /* Membuat rute berjejer ke samping */
-  gap: 15px;             /* Jarak antar kotak */
-  justify-content: start; /* Mulai dari kiri */
+  display: flex;          
+  gap: 15px;             
+  justify-content: start; 
   padding: 20px 0;
 }
 
 .rute-card {
-  background-color: #f8f9fa; /* Warna latar kotak tipis */
-  border: 1px solid #ddd;    /* Garis tepi tipis */
-  border-radius: 10px;       /* Sudut melengkung */
-  padding: 15px 30px;        /* Jarak dalam kotak */
-  text-align: center;        /* Teks di tengah */
-  min-width: 120px;          /* Lebar minimal kotak */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bayangan halus */
+  background-color: #f8f9fa; 
+  border: 1px solid #ddd;    
+  border-radius: 10px;      
+  padding: 15px 30px;      
+  text-align: center;       
+  min-width: 120px;          
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
 }
 
 .icon {
   font-size: 20px;
-  color: #2e7d32;            /* Warna hijau ikon (sesuaikan) */
+  color: #2e7d32;            
   margin-bottom: 5px;
 }
 
@@ -161,7 +161,7 @@ input, textarea {
 }
 
 input[type="submit"] {
-  background: #2b4eff;
+  background: #2e7d32;
   color: white;
   border: none;
   cursor: pointer;
@@ -169,7 +169,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background: #1a35cc;
+  background: #7cb47e;
 }
 
 .btn-hapus {
