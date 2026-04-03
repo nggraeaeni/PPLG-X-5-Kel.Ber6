@@ -31,7 +31,7 @@ body {
   padding: 20px 20px;           
   min-width: 150px;          
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  width: 300px;
+  width: 200px;
 }
 
 .rute-container h3 {
@@ -74,13 +74,9 @@ nav h2 {
   margin-left: 10px;
   font-size: 19px;
 }
-nav img {
-  margin-right: 10px;
-  background-color: rgb(6, 92, 26);
-  height: 50px;
-  width: 50px;
-  border-radius: 10%;
 
+nav i {
+  font-size: 25px;
 }
 
 /*card */
@@ -88,13 +84,41 @@ nav img {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   margin-bottom: 20px;
-  width: 70%;
-  margin-left: 15%;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
-.card img {
-  
+
+.section-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.section-row .card {
+  flex: 1 1 45%;
+  max-width: 48%;
+}
+
+@media (max-width: 900px) {
+  .section-row .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+#laporan {
+  display: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+#laporan.show {
+  display: block;
+  opacity: 1;
 }
 
 h1 {
@@ -184,15 +208,35 @@ input[type="submit"]:hover {
   background: #7cb47e;
 }
 
-.btn-hapus {
-  background-color: #ff4d4d;
+.btn-hapus,
+.btn-edit {
   color: white;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+  margin-right: 5px;
+  font-size: 13px;
+}
+
+.btn-hapus {
+  background-color: #ff4d4d;
 }
 
 .btn-hapus:hover {
   background-color: #cc0000;
+}
+
+.btn-edit {
+  background-color: #4a90e2;
+}
+
+.btn-edit:hover {
+  background-color: #1f72c3;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
