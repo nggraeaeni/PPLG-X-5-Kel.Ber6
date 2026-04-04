@@ -30,23 +30,11 @@ tombolKirim.addEventListener('click', function(event) {
 
     let Nama = document.getElementById('NamaInput').value;
     let noRumah = document.getElementById('noRumahInput').value;
-    let volume = parseFloat(document.getElementById('volumeInput').value);
     let pesan = document.getElementById('pesanInput').value;
-    let tanggalInput = document.getElementById('tanggalInput').value;
-    let waktu;
+    let waktu = new Date().toLocaleDateString('id-ID');
 
-    if (tanggalInput) {
-        waktu = new Date(tanggalInput).toLocaleDateString('id-ID', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-        });
-    } else {
-        waktu = new Date().toLocaleDateString('id-ID');
-    }
-
-    if (noRumah === "" || pesan === "" || isNaN(volume) || volume <= 0) {
-        alert('Mohon isi data No Rumah, Volume (kg) dan Pesan dengan benar!');
+    if (noRumah === "" || pesan === "") {
+        alert('Mohon isi data No Rumah dan Pesan dengan benar!');
         return;
     }
 
@@ -62,9 +50,7 @@ tombolKirim.addEventListener('click', function(event) {
         return;
     }
 
-    let weekIndex = getWeekIndex(tanggalInput);
-    routeVolumeByWeek[rute][weekIndex] += volume;
-    updateGrafik();
+    let weekIndex = getWeekIndex(new Date().toISOString().split('T')[0]); // pakai tanggal hari ini
 
     let barisBaru = document.createElement('tr');
 
@@ -72,7 +58,6 @@ tombolKirim.addEventListener('click', function(event) {
         <td>${Nama}</td>
         <td>${rute}</td>
         <td>${noRumah}</td>
-        <td>${volume.toFixed(1)} kg</td>
         <td>${pesan}</td>
         <td>${waktu}</td>
         <td class="actions-cell">
@@ -84,10 +69,6 @@ tombolKirim.addEventListener('click', function(event) {
     let tombolHapus = barisBaru.querySelector('.btn-hapus');
     tombolHapus.addEventListener('click', function() {
         if(confirm("Apakah Anda yakin ingin menghapus laporan ini?")) {
-            // Kurangi data volume sebelum hapus
-            const weekIndex = getWeekIndex(tanggalInput);
-            routeVolumeByWeek[rute][weekIndex] = Math.max(0, routeVolumeByWeek[rute][weekIndex] - volume);
-            updateGrafik();
             barisBaru.remove();
         }
     });
@@ -96,16 +77,10 @@ tombolKirim.addEventListener('click', function(event) {
     tombolEdit.addEventListener('click', function() {
         document.getElementById('NamaInput').value = Nama;
         document.getElementById('noRumahInput').value = noRumah;
-        document.getElementById('volumeInput').value = volume;
         document.getElementById('pesanInput').value = pesan;
 
-        // saat edit, hapus row lama dan update chart
-        const weekIndex = getWeekIndex(tanggalInput);
-        routeVolumeByWeek[rute][weekIndex] = Math.max(0, routeVolumeByWeek[rute][weekIndex] - volume);
-        updateGrafik();
         barisBaru.remove();
 
-        document.getElementById('tanggalInput').value = tanggalInput; 
         document.getElementById('btnKirim').value = 'Perbarui';
     });
 
@@ -118,11 +93,10 @@ tombolKirim.addEventListener('click', function(event) {
 
     document.getElementById('NamaInput').value = "";
     document.getElementById('noRumahInput').value = "";
-    document.getElementById('volumeInput').value = "";
     document.getElementById('pesanInput').value = "";
 });
 
-// Sembunyikan card laporan jika tidak ada baris
+// Sembunyikan card laporan
 const observer = new MutationObserver(() => {
     const laporanCard = document.getElementById('laporan');
     if (isiTabel.children.length === 0) {
@@ -131,7 +105,45 @@ const observer = new MutationObserver(() => {
 });
 observer.observe(isiTabel, { childList: true });
 
-// Grafik sederhana untuk tampilan data pengangkutan sampah
+//from form angkut
+let formAngkut = document.getElementById('formAngkut');
+formAngkut.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let nama = document.getElementById('namaAngkutInput').value;
+    let noRumah = document.getElementById('noRumahAngkutInput').value;
+    let volume = parseFloat(document.getElementById('volumeAngkutInput').value);
+
+    if (nama === "" || noRumah === "" || isNaN(volume) || volume <= 0) {
+        alert('Mohon isi semua data dengan benar!');
+        return;
+    }
+
+    let rute;
+    if (noRumah > 0 && noRumah < 20) {
+        rute = "A";
+    } else if (noRumah >= 20 && noRumah < 40) {
+        rute = "B";
+    } else if (noRumah >= 40 && noRumah <= 60) {
+        rute = "C";
+    } else {
+        alert('Nomor rumah tidak valid!');
+        return;
+    }
+
+    // Update grafik untuk minggu saat ini (index 0)
+    routeVolumeByWeek[rute][0] += volume;
+    updateGrafik();
+
+    alert('Angkutan berhasil dikonfirmasi! Grafik telah diperbarui.');
+
+    //reset form
+    document.getElementById('namaAngkutInput').value = "";
+    document.getElementById('noRumahAngkutInput').value = "";
+    document.getElementById('volumeAngkutInput').value = "";
+});
+
+// grafikkk. copy dari gugel, karena masih bingung
 const ctx = document.getElementById('grafikPengangkutan').getContext('2d');
 const grafikPengangkutan = new Chart(ctx, {
     type: 'bar',
