@@ -28,7 +28,8 @@ function updateGrafik() {
 tombolKirim.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let Nama = document.getElementById('NamaInput').value;
+    let idLaporan = "ID-" + (Math.floor(Math.random() * 9000) + 1000);
+    let Nama = document.getElementById('NamaInput').value.toUpperCase();
     let noRumah = document.getElementById('noRumahInput').value;
     let pesan = document.getElementById('pesanInput').value;
     let waktu = new Date().toLocaleDateString('id-ID');
@@ -55,6 +56,7 @@ tombolKirim.addEventListener('click', function(event) {
     let barisBaru = document.createElement('tr');
 
     barisBaru.innerHTML = `
+        <td><small style="color: gray;">#${idLaporan}</small><br><b>${Nama}</b></td>
         <td>${Nama}</td>
         <td>${rute}</td>
         <td>${noRumah}</td>
