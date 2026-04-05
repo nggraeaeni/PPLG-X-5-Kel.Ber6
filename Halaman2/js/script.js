@@ -1,5 +1,6 @@
 let tombolKirim = document.getElementById('btnKirim');
 let isiTabel = document.getElementById('isi');
+let editingRow = null; // Untuk menyimpan baris yang sedang diedit
 
 // Data volume per rute per minggu (index 0..3 untuk Minggu 1..4)
 const routeVolumeByWeek = {
@@ -28,75 +29,109 @@ function updateGrafik() {
 tombolKirim.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let idLaporan = "ID-" + (Math.floor(Math.random() * 9000) + 1000);
     let Nama = document.getElementById('NamaInput').value.toUpperCase();
     let noRumah = document.getElementById('noRumahInput').value;
     let pesan = document.getElementById('pesanInput').value;
     let waktu = new Date().toLocaleDateString('id-ID');
 
-    if (noRumah === "" || pesan === "") {
-        alert('Mohon isi data No Rumah dan Pesan dengan benar!');
+    if (Nama === "" || noRumah === "" || pesan === "") {
+        alert('Mohon isi semua data dengan benar!');
         return;
     }
 
     let rute;
-    if (noRumah > 0 && noRumah < 20) {
+    if (noRumah > 0 && noRumah < 21) {
         rute = "A";
-    } else if (noRumah >= 20 && noRumah < 40) {
+    } else if (noRumah >= 21 && noRumah < 41) {
         rute = "B";
-    } else if (noRumah >= 40 && noRumah <= 60) {
+    } else if (noRumah >= 41 && noRumah <= 60) {
         rute = "C";
     } else {
         alert('Nomor rumah tidak valid!');
         return;
     }
 
-    let weekIndex = getWeekIndex(new Date().toISOString().split('T')[0]); // pakai tanggal hari ini
+    if (editingRow) {
+        // Update baris yang sedang diedit
+        let idLaporan = editingRow.cells[0].innerHTML.match(/#ID-\d+/)[0]; // Ambil ID dari cell pertama
+        editingRow.innerHTML = `
+            <td><small style="color: gray;">${idLaporan}</small><br><b>${Nama}</b></td>
+            <td>${rute}</td>
+            <td>${noRumah}</td>
+            <td>${pesan}</td>
+            <td>${waktu}</td>
+            <td>${Tindakan}</td>
+            <td class="actions-cell">
+                <button class="btn-edit">Edit</button>
+                <button class="btn-hapus">Hapus</button>
+            </td>
+        `;
 
-    let barisBaru = document.createElement('tr');
+        // Re-attach event listeners
+        attachEventListeners(editingRow);
 
-    barisBaru.innerHTML = `
-        <td><small style="color: gray;">#${idLaporan}</small><br><b>${Nama}</b></td>
-        <td>${Nama}</td>
-        <td>${rute}</td>
-        <td>${noRumah}</td>
-        <td>${pesan}</td>
-        <td>${waktu}</td>
-        <td class="actions-cell">
-            <button class="btn-edit">Edit</button>
-            <button class="btn-hapus">Hapus</button>
-        </td>
-    `;
+        editingRow = null;
+        document.getElementById('btnKirim').value = 'Kirim';
+        alert('Laporan berhasil diperbarui');
+    } else {
+        // Tambah baris baru
+        let idLaporan = "ID-" + (Math.floor(Math.random() * 9000) + 1000);
 
-    let tombolHapus = barisBaru.querySelector('.btn-hapus');
-    tombolHapus.addEventListener('click', function() {
-        if(confirm("Apakah Anda yakin ingin menghapus laporan ini?")) {
-            barisBaru.remove();
-        }
-    });
+        let barisBaru = document.createElement('tr');
 
-    let tombolEdit = barisBaru.querySelector('.btn-edit');
-    tombolEdit.addEventListener('click', function() {
-        document.getElementById('NamaInput').value = Nama;
-        document.getElementById('noRumahInput').value = noRumah;
-        document.getElementById('pesanInput').value = pesan;
+        barisBaru.innerHTML = `
+            <td><small style="color: gray;">#${idLaporan}</small><br><b>${Nama}</b></td>
+            <td>${rute}</td>
+            <td>${noRumah}</td>
+            <td>${pesan}</td>
+            <td>${waktu}</td>
+            <td class="actions-cell">
+                <button class="btn-edit">Edit</button>
+                <button class="btn-hapus">Hapus</button>
+            </td>
+        `;
 
-        barisBaru.remove();
+        attachEventListeners(barisBaru);
 
-        document.getElementById('btnKirim').value = 'Perbarui';
-    });
+        isiTabel.appendChild(barisBaru);
 
-    isiTabel.appendChild(barisBaru);
+        const laporanCard = document.getElementById('laporan');
+        laporanCard.classList.add('show');
 
-    const laporanCard = document.getElementById('laporan');
-    laporanCard.classList.add('show');
+        alert('Pesan anda sudah terkirim');
+    }
 
-    alert('Pesan anda sudah terkirim');
-
+    // Reset form
     document.getElementById('NamaInput').value = "";
     document.getElementById('noRumahInput').value = "";
     document.getElementById('pesanInput').value = "";
 });
+
+function attachEventListeners(row) {
+    let tombolHapus = row.querySelector('.btn-hapus');
+    tombolHapus.addEventListener('click', function() {
+        if(confirm("Apakah Anda yakin ingin menghapus laporan ini?")) {
+            row.remove();
+        }
+    });
+
+    let tombolEdit = row.querySelector('.btn-edit');
+    tombolEdit.addEventListener('click', function() {
+        let cells = row.cells;
+        let namaText = cells[0].innerText.split('\n')[1]; // Ambil nama dari bold
+        let rute = cells[1].innerText;
+        let noRumah = cells[2].innerText;
+        let pesan = cells[3].innerText;
+        let waktu = cells[4].innerText;
+
+        document.getElementById('NamaInput').value = namaText;
+        document.getElementById('noRumahInput').value = noRumah;
+        document.getElementById('pesanInput').value = pesan;
+
+        editingRow = row;
+        document.getElementById('btnKirim').value = 'Perbarui';
+    });
+}
 
 // Sembunyikan card laporan
 const observer = new MutationObserver(() => {
