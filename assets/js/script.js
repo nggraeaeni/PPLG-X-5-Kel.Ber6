@@ -3,12 +3,15 @@ let isiTabel = document.getElementById('isi');
 let editingRow = null; // Untuk menyimpan baris yang sedang diedit
 
 // Data volume per rute per minggu (index 0..3 untuk Minggu 1..4)
+// Awalnya semua 0, akan diupdate saat angkutan dikonfirmasi
+// ngaruh ke grafik, jadi setiap kali ada angkutan baru masuk, data ini akan diupdate dan grafik akan refresh
 const routeVolumeByWeek = {
     A: [0, 0, 0, 0],
     B: [0, 0, 0, 0],
     C: [0, 0, 0, 0]
 };
 
+// Fungsinya untuk menentukan index minggu berdasarkan tanggal
 function getWeekIndex(dateStr) {
     if (!dateStr) return 0;
     const d = new Date(dateStr);
@@ -19,6 +22,7 @@ function getWeekIndex(dateStr) {
     return 3;
 }
 
+//untuk update grafik setelah data angkut masuk
 function updateGrafik() {
     grafikPengangkutan.data.datasets[0].data = routeVolumeByWeek.A;
     grafikPengangkutan.data.datasets[1].data = routeVolumeByWeek.B;
@@ -26,9 +30,11 @@ function updateGrafik() {
     grafikPengangkutan.update();
 }
 
+// Event listener untuk tombol kirim laporan
 tombolKirim.addEventListener('click', function(event) {
     event.preventDefault();
 
+    // Validasi inputan
     let Nama = document.getElementById('NamaInput').value.toUpperCase();
     let noRumah = document.getElementById('noRumahInput').value;
     let pesan = document.getElementById('pesanInput').value;
@@ -39,6 +45,7 @@ tombolKirim.addEventListener('click', function(event) {
         return;
     }
 
+    // nentuin rute berdasarkan nomor rumah
     let rute;
     if (noRumah > 0 && noRumah < 21) {
         rute = "A";
@@ -60,25 +67,25 @@ tombolKirim.addEventListener('click', function(event) {
             <td>${noRumah}</td>
             <td>${pesan}</td>
             <td>${waktu}</td>
-            <td>${Tindakan}</td>
             <td class="actions-cell">
                 <button class="btn-edit">Edit</button>
                 <button class="btn-hapus">Hapus</button>
             </td>
         `;
 
-        // Re-attach event listeners
+        //agar tombol edit dan hapus tetap berfungsi setelah update
         attachEventListeners(editingRow);
 
         editingRow = null;
         document.getElementById('btnKirim').value = 'Kirim';
         alert('Laporan berhasil diperbarui');
     } else {
-        // Tambah baris baru
+        // Generate ID laporan secara acak
         let idLaporan = "ID-" + (Math.floor(Math.random() * 9000) + 1000);
 
         let barisBaru = document.createElement('tr');
 
+        // Isi baris baru dengan data laporan
         barisBaru.innerHTML = `
             <td><small style="color: gray;">#${idLaporan}</small><br><b>${Nama}</b></td>
             <td>${rute}</td>
@@ -95,6 +102,7 @@ tombolKirim.addEventListener('click', function(event) {
 
         isiTabel.appendChild(barisBaru);
 
+        // Tampilkan card laporan jika belum terlihat
         const laporanCard = document.getElementById('laporan');
         laporanCard.classList.add('show');
 
@@ -107,6 +115,7 @@ tombolKirim.addEventListener('click', function(event) {
     document.getElementById('pesanInput').value = "";
 });
 
+// Fungsi untuk menambahkan event listener pada tombol edit dan hapus
 function attachEventListeners(row) {
     let tombolHapus = row.querySelector('.btn-hapus');
     tombolHapus.addEventListener('click', function() {
@@ -180,7 +189,7 @@ formAngkut.addEventListener('submit', function(event) {
     document.getElementById('volumeAngkutInput').value = "";
 });
 
-// grafikkk. copy dari gugel, karena masih bingung
+// grafikkk
 const ctx = document.getElementById('grafikPengangkutan').getContext('2d');
 const grafikPengangkutan = new Chart(ctx, {
     type: 'bar',
@@ -224,5 +233,25 @@ const grafikPengangkutan = new Chart(ctx, {
                 }
             }
         }
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    //memposisikan form angkut ke bawah grafik
+    const formAngkutCard = document.querySelectorAll('.card')[2];
+    const grafikSection = document.querySelector('.grafik-section');
+
+    if (formAngkutCard && grafikSection) {
+        formAngkutCard.classList.add('form-angkut-bawah');
+        grafikSection.appendChild(formAngkutCard);
+    }
+
+    // pindahin laporan ke bawah semua card
+    const laporanSection = document.querySelector('.section-tabel');
+    const kolomKanan = document.querySelector('.kolom-kanan');
+
+    if (laporanSection && kolomKanan) {
+        kolomKanan.appendChild(laporanSection);
     }
 });
