@@ -229,27 +229,3 @@ tr:nth-child(even) {
     align-items: center;
     gap: 4px;
 }   
-
-.container {
-  display: flex;
-  flex-direction: column; 
-  gap: 15px;
-}
-
-.panel-rute, .panel-laporan {
-  width: 100%; 
-}
-
-@media (min-width: 768px) {
-  .container {
-    flex-direction: row; 
-  }
-
-  .panel-rute {
-    width: 70%; 
-  }
-
-  .panel-laporan {
-    width: 30%;
-  }
-}
