@@ -166,11 +166,11 @@ formAngkut.addEventListener('submit', function(event) {
     }
 
     let rute;
-    if (noRumah > 0 && noRumah < 20) {
+    if (noRumah > 0 && noRumah <= 20) {
         rute = "A";
-    } else if (noRumah >= 20 && noRumah < 40) {
+    } else if (noRumah > 20 && noRumah <= 40) {
         rute = "B";
-    } else if (noRumah >= 40 && noRumah <= 60) {
+    } else if (noRumah > 40 && noRumah <= 60) {
         rute = "C";
     } else {
         alert('Nomor rumah tidak valid!');
